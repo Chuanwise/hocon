@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+}
+
+group 'cn.chuanwise'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        name 'Chuanwise'
+        url 'http://114.116.126.53:8081/repository/maven-public/'
+        allowInsecureProtocol true
+    }
+}
+
+if (new File('publish.gradle').exists()) {
+    apply from: 'publish.gradle'
+}
+
+dependencies {
+    implementation 'cn.chuanwise:chuanwise-common:1.0-SNAPSHOT'
+    testImplementation 'cn.chuanwise:chuanwise-common:1.0-SNAPSHOT'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
+// gradle mirrors for Chinese
+apply from: 'mirrors.gradle'
+
+test {
+    useJUnitPlatform()
+}
